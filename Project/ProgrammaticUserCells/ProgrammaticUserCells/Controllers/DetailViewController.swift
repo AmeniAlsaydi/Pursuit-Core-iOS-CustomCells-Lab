@@ -14,10 +14,6 @@ class DetailViewController: UIViewController {
     private let detailView = DetailView()
     
     var user: User?
-    
-    override func viewDidLayoutSubviews() {
-        detailView.imageView.layer.cornerRadius = detailView.imageView.frame.width/2
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,6 +12,8 @@ class DetailView: UIView {
     
     public lazy var imageView: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
         return image
         
     }()
@@ -54,6 +56,11 @@ class DetailView: UIView {
      setupNameLabelConstraint()
      setupEmailLabelConstraint()
      setupPhoneLabelConstraint()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.layer.cornerRadius = imageView.frame.width/10
     }
 
     
