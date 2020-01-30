@@ -15,11 +15,10 @@ class UserView: UIView {
 
           let layout = UICollectionViewFlowLayout()
           layout.scrollDirection = .vertical
-          layout.itemSize = CGSize(width: 400, height: 400)
           let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout) // like creating an empty variable
-          cv.backgroundColor = .systemGray
-          
-          return cv
+        cv.backgroundColor = .white
+        return cv
+        
           
       }()
       

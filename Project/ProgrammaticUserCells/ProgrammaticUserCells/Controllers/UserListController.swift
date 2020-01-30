@@ -17,8 +17,9 @@ class UserListController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
-        navigationItem.title = "Contacts"
+        view.backgroundColor = .white
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Tsering's Friends"
         
         getUsers()
         
@@ -34,13 +35,22 @@ class UserListController: UIViewController {
     
     private func getUsers() {
         
+        UsersFetchingService.manager.getUsers { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let users):
+                self.users = users
+            }
+        }
+    
     }
 
 }
 
 extension UserListController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        users.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -48,6 +58,11 @@ extension UserListController: UICollectionViewDataSource {
             fatalError("could not downcast user cell")
         }
         cell.backgroundColor = .white
+        
+        let user = users[indexPath.row]
+        // configure cell
+        cell.configureCell(user: user)
+        
         return cell
         
     }
