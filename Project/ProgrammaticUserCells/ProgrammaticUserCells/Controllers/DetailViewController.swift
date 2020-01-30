@@ -14,6 +14,10 @@ class DetailViewController: UIViewController {
     private let detailView = DetailView()
     
     var user: User?
+    
+    override func viewDidLayoutSubviews() {
+        detailView.imageView.layer.cornerRadius = detailView.imageView.frame.width/2
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +34,11 @@ class DetailViewController: UIViewController {
         guard let user = user else {
             fatalError("check segue")
         }
+        let fullName = "\(user.name.first) \(user.name.last)"
         
-        detailView.nameLabel.text = user.name.first
+        detailView.nameLabel.text = fullName
+        detailView.emailLabel.text = user.email
+        detailView.phoneLabel.text = user.phone
         detailView.imageView.getImage(with: user.picture.large) { (result) in
             switch result {
             case .failure(let error):
