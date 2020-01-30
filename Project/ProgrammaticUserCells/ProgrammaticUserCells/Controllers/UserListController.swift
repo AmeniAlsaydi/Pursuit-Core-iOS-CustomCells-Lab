@@ -94,5 +94,15 @@ extension UserListController: UICollectionViewDelegateFlowLayout {
         return 5
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let user = users[indexPath.row]
+        
+        let detailVC = DetailViewController()
+        detailVC.user = user
+        
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
 }
 

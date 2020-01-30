@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 class DetailViewController: UIViewController {
     
@@ -17,6 +18,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        view.backgroundColor = .white
 
     }
 
@@ -30,5 +32,15 @@ class DetailViewController: UIViewController {
         }
         
         detailView.nameLabel.text = user.name.first
+        detailView.imageView.getImage(with: user.picture.large) { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.detailView.imageView.image = image
+                }
+            }
+        }
     }
 }
